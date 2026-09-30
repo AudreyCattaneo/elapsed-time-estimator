@@ -32,3 +32,10 @@ Calling `estimate()` before at least two marks have been recorded throws an erro
 - `estimate(remainingUnits)` — Returns estimated remaining milliseconds for a non-negative integer number of remaining units.
 - `sampleCount` — Read-only number of completed intervals currently in the rolling window.
 - `reset()` — Clears all recorded data.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
